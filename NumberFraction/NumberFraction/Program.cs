@@ -17,21 +17,36 @@ namespace NumberFraction
 	{
 		static void Main(string[] args)
 		{
-			Fraction fr1 = new Fraction(7, 12);
-			Fraction fr2 = new Fraction(6, 13);
+			Fraction fr1 = new Fraction(30, 0);
+			Fraction fr2 = new Fraction(20, 0);
 			Fraction fr3 = new Fraction();
 
+			Console.WriteLine("Результат сложения");
 			fr3.numerator = Fraction.Adding(fr1, fr2).numerator;
 			fr3.denominator = Fraction.Adding(fr1, fr2).denominator;
 			Console.WriteLine(fr3.numerator + "/" + fr3.denominator);
 
+			Console.WriteLine("Результат вычитания");
 			fr3.numerator = Fraction.Subtracting(fr1, fr2).numerator;
 			fr3.denominator = Fraction.Subtracting(fr1, fr2).denominator;
 			Console.WriteLine(fr3.numerator + "/" + fr3.denominator);
 
+			Console.WriteLine("Результат умножения");
 			fr3.numerator = Fraction.Multiplication(fr1, fr2).numerator;
-			fr3.denominator = Fraction.Subtracting(fr1, fr2).denominator;
+			fr3.denominator = Fraction.Multiplication(fr1, fr2).denominator;
 			Console.WriteLine(fr3.numerator + "/" + fr3.denominator);
+
+			Console.WriteLine("Результат деления");
+			fr3.numerator = Fraction.Division(fr1, fr2).numerator;
+			fr3.denominator = Fraction.Division(fr1, fr2).denominator;
+			Console.WriteLine(fr3.numerator + "/" + fr3.denominator);
+
+			Console.WriteLine("Упрощение дроби");
+			fr3.numerator = Fraction.GreatestCommonDivisor(fr3).numerator;
+			fr3.denominator = Fraction.GreatestCommonDivisor(fr3).denominator;
+			Console.WriteLine(fr3.numerator + "/" + fr3.denominator);
+
+
 
 			Console.ReadKey();
 		}

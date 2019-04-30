@@ -20,7 +20,7 @@ namespace NumberFraction
 		public Fraction() { } // для создания пустого объекта в который запишем результат операции
 
 		/// <summary>
-		/// конструктор класса Fraction
+		/// конструктор c параметрами класса Fraction
 		/// </summary>
 		/// <param name="numer"></param>
 		/// <param name="denomi"></param>
@@ -28,6 +28,28 @@ namespace NumberFraction
 		{
 			numerator = numer;
 			denominator = denomi;
+		}
+
+		/// <summary>
+		/// упрощение дробей
+		/// </summary>
+		/// <param name="fr1"></param>
+		/// <param name="fr2"></param>
+		/// <returns></returns>
+		public static Fraction GreatestCommonDivisor(Fraction fr)
+		{
+			int a = fr.numerator;
+			int b = fr.denominator;
+
+			while (b != 0)
+			{
+				b = a % (a = b);
+			}
+
+			fr.numerator = fr.numerator / a;
+			fr.denominator = fr.denominator / a;
+
+			return fr;
 		}
 
 		/// <summary>
@@ -40,16 +62,21 @@ namespace NumberFraction
 		{
 			Fraction resultOfFractions = new Fraction(); // новый объект типа Fraction для хранения результата операции
 
-			if (fr1.denominator != fr2.denominator)
+			if (fr1.denominator == 0 || fr2.denominator == 0)
 			{
-				resultOfFractions.denominator = fr1.denominator * fr2.denominator;
-				resultOfFractions.numerator = fr1.numerator * fr2.denominator + fr2.numerator * fr1.denominator;
+				throw new ArgumentException("Знаменатель не может быть равен 0");
 			}
-			else
-			{
-				resultOfFractions.denominator = fr1.denominator;
-				resultOfFractions.numerator = fr1.numerator + fr2.numerator;
-			}
+
+				if (fr1.denominator != fr2.denominator)
+				{
+					resultOfFractions.denominator = fr1.denominator * fr2.denominator;
+					resultOfFractions.numerator = fr1.numerator * fr2.denominator + fr2.numerator * fr1.denominator;
+				}
+				else
+				{
+					resultOfFractions.denominator = fr1.denominator;
+					resultOfFractions.numerator = fr1.numerator + fr2.numerator;
+				}
 
 			return resultOfFractions;
 		}
@@ -63,6 +90,11 @@ namespace NumberFraction
 		public static Fraction Subtracting(Fraction fr1, Fraction fr2)
 		{
 			Fraction resultOfFractions = new Fraction();
+
+			if (fr1.denominator == 0 || fr2.denominator == 0)
+			{
+				throw new ArgumentException("Знаменатель не может быть равен 0");
+			}
 
 			if (fr1.denominator != fr2.denominator)
 			{
@@ -88,8 +120,34 @@ namespace NumberFraction
 		{
 			Fraction resultOfFractions = new Fraction();
 
+			if (fr1.denominator == 0 || fr2.denominator == 0)
+			{
+				throw new ArgumentException("Знаменатель не может быть равен 0");
+			}
+
 			resultOfFractions.denominator = fr1.denominator * fr2.denominator;
 			resultOfFractions.numerator = fr1.numerator * fr2.numerator;
+
+			return resultOfFractions;
+		}
+
+		/// <summary>
+		/// деление дробей
+		/// </summary>
+		/// <param name="fr1"></param>
+		/// <param name="fr2"></param>
+		/// <returns></returns>
+		public static Fraction Division(Fraction fr1, Fraction fr2)
+		{
+			Fraction resultOfFractions = new Fraction();
+
+			if (fr1.denominator == 0 || fr2.denominator == 0)
+			{
+				throw new ArgumentException("Знаменатель не может быть равен 0");
+			}
+
+			resultOfFractions.denominator = fr1.denominator * fr2.numerator;
+			resultOfFractions.numerator = fr1.numerator * fr2.denominator;
 
 			return resultOfFractions;
 		}
